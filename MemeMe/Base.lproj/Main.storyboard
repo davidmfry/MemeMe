@@ -25,21 +25,37 @@
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="wt8-Wx-y8j"/>
-                                    <barButtonItem systemItem="camera" id="smh-JY-REt"/>
+                                    <barButtonItem systemItem="camera" id="smh-JY-REt">
+                                        <connections>
+                                            <action selector="cameraButtonPressed:" destination="vXZ-lx-hvc" id="5bz-qw-BTT"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="hRf-nO-zns"/>
-                                    <barButtonItem title="Album" id="qeZ-Vg-W0y"/>
+                                    <barButtonItem title="Album" id="qeZ-Vg-W0y">
+                                        <connections>
+                                            <action selector="albumButtonPressed:" destination="vXZ-lx-hvc" id="G75-SY-5AS"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="B7y-Bh-EQL"/>
                                 </items>
                             </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5b4-l3-lrK">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem systemItem="action" id="FVD-V4-vyY"/>
+                                    <barButtonItem systemItem="action" id="FVD-V4-vyY">
+                                        <connections>
+                                            <action selector="actionButtonPressed:" destination="vXZ-lx-hvc" id="UKO-CA-uwe"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="x4C-RC-4o0"/>
-                                    <barButtonItem title="Cancel" id="ZBV-nU-CS7"/>
+                                    <barButtonItem title="Cancel" id="ZBV-nU-CS7">
+                                        <connections>
+                                            <action selector="cancelButtonPressed:" destination="vXZ-lx-hvc" id="FOl-ph-QZo"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8H1-OB-gOb">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8H1-OB-gOb" userLabel="Botton Textfield">
                                 <rect key="frame" x="16" y="484" width="568" height="36"/>
                                 <attributedString key="attributedText">
                                     <fragment content="BOTTOM">
@@ -52,7 +68,7 @@
                                 </attributedString>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hxq-JI-WrF">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hxq-JI-WrF" userLabel="Top Textfield">
                                 <rect key="frame" x="16" y="69" width="568" height="36"/>
                                 <attributedString key="attributedText">
                                     <fragment content="TOP">
@@ -86,6 +102,12 @@
                             <constraint firstItem="Ww9-4a-77m" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="nsI-6k-cEe"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bottomTextfield" destination="8H1-OB-gOb" id="kgu-V6-BIy"/>
+                        <outlet property="cameraBarButton" destination="smh-JY-REt" id="fvZ-vj-Wl9"/>
+                        <outlet property="imageView" destination="Ww9-4a-77m" id="icc-F6-bbv"/>
+                        <outlet property="topTextfield" destination="Hxq-JI-WrF" id="lRh-3E-Dqh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
