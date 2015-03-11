@@ -24,6 +24,8 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
     var viewX: CGFloat?
     var viewY: CGFloat?
     
+    var memeImage: UIImage?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -48,6 +50,13 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
         {
             self.cameraBarButton.enabled = false
         }
+        
+//        self.subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(animated: Bool)
+    {
+//        self.unsubscribeFromKeyboardNotifications()
     }
 
     override func prefersStatusBarHidden() -> Bool {
@@ -59,6 +68,7 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
     {
         let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         self.imageView.image = image
+        self.actionButton.enabled = true
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -122,8 +132,11 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
     @IBAction func actionButtonPressed(sender: UIBarButtonItem)
     {
         
-        self.saveMeme(self.generateMemedImage())
-        
+        self.memeImage = generateMemedImage()
+        let activityViewController = UIActivityViewController(activityItems: [self.memeImage!], applicationActivities: nil)
+        self.presentViewController(activityViewController, animated: true) { () -> Void in
+            self.saveMeme(self.memeImage!)
+        }
     }
     
     @IBAction func cancelButtonPressed(sender: UIBarButtonItem)
@@ -140,6 +153,19 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
     {
         self.presentImagePicker("photo-libary")
     }
+    
+    
+//MARK: Notifications
+//    func subscribeToKeyboardNotifications()
+//    {
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow", name: UIKeyboardWillShowNotification, object: nil)
+//    }
+//    
+//    func unsubscribeFromKeyboardNotifications()
+//    {
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+//    }
+    
 //MARK: Helper function
     func checkForCamera() -> Bool
     {
@@ -174,10 +200,24 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
         imagePicker.delegate = self
         return imagePicker
     }
+    
+    
+    func keyboardWillShow(notification: NSNotification)
+    {
+        self.view.frame.origin.y -= getKeyboardHeight(notification)
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat
+    {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as NSValue
+        return keyboardSize.CGRectValue().height
+    }
 
     func saveMeme(memedImage: UIImage)
     {
         var newMeme = Meme(topTitle: self.topTextfield.text, bottomTitle: self.bottomTextfield.text, image: self.imageView.image!, memedImage: memedImage)
+        (UIApplication.sharedApplication().delegate as AppDelegate).memes.append(newMeme)
     }
     
     func generateMemedImage() -> UIImage

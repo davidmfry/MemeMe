@@ -99,7 +99,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="actionButton" destination="FVD-V4-vyY" id="lTY-Ti-Jwa"/>
+                        <outlet property="actionButton" destination="FVD-V4-vyY" id="cof-fF-YLq"/>
                         <outlet property="bottomTabBar" destination="S7P-dG-dhb" id="cMn-hs-Gss"/>
                         <outlet property="bottomTextfield" destination="8H1-OB-gOb" id="kgu-V6-BIy"/>
                         <outlet property="cameraBarButton" destination="smh-JY-REt" id="fvZ-vj-Wl9"/>
