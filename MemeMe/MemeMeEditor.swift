@@ -8,17 +8,36 @@
 
 import UIKit
 
-class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
+class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate
 {
 
     @IBOutlet weak var topTextfield: UITextField!
     @IBOutlet weak var bottomTextfield: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraBarButton: UIBarButtonItem!
+    @IBOutlet weak var topTabBar: UIToolbar!
+    @IBOutlet weak var bottomTabBar: UIToolbar!
+    @IBOutlet weak var actionButton: UIBarButtonItem!
+    
+    var viewWidth: CGFloat?
+    var viewHeight: CGFloat?
+    var viewX: CGFloat?
+    var viewY: CGFloat?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        self.topTextfield.delegate = self
+        self.bottomTextfield.delegate = self
+        self.imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        self.actionButton.enabled = false
+        
+        // Getting the view diminsions to movie up and down with the keyboard
+        self.viewWidth = self.view.frame.width
+        self.viewHeight = self.view.frame.height
+        self.viewX = self.view.frame.origin.x
+        self.viewY = self.view.frame.origin.y
         
  
     }
@@ -31,12 +50,80 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
         }
     }
 
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
 //MARK: Delegate Methods
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject])
+    {
+        let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        self.imageView.image = image
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController)
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool
+    {
+        if textField == self.bottomTextfield
+        {
+            // Moves the view out of the way for the text fields
+            var textFieldPadding: CGFloat = 300.0
+            var currentWidth = self.view.bounds.width
+            var currentHeight = self.view.bounds.height
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                var newY = self.view.bounds.origin.y + textField.frame.origin.y - textFieldPadding
+                var currentX = self.view.bounds.origin.x
+                println(newY)
+                self.view.bounds = CGRect(x: currentX, y: newY, width: currentWidth, height: currentHeight)
+            })
+        }
+        
+        return true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField)
+    {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.view.bounds = CGRect(x: self.viewX!, y: self.viewY!, width: self.viewWidth!, height: self.viewHeight!)
+        })
+        
+        if textField == self.topTextfield
+        {
+            
+        }
+        
+        if textField == self.bottomTextfield
+        {
+            
+        }
+    }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
+    {
+        // Dissmiss the keyboard when the view is touched
+        self.view.endEditing(true)
+    }
+    
+    
     
     
 //MARK: IBActions
     @IBAction func actionButtonPressed(sender: UIBarButtonItem)
     {
+        
+        self.saveMeme(self.generateMemedImage())
+        
     }
     
     @IBAction func cancelButtonPressed(sender: UIBarButtonItem)
@@ -87,6 +174,32 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
         imagePicker.delegate = self
         return imagePicker
     }
+
+    func saveMeme(memedImage: UIImage)
+    {
+        var newMeme = Meme(topTitle: self.topTextfield.text, bottomTitle: self.bottomTextfield.text, image: self.imageView.image!, memedImage: memedImage)
+    }
+    
+    func generateMemedImage() -> UIImage
+    {
+        // Hide tabbars
+        self.topTabBar.hidden = true
+        self.bottomTabBar.hidden = true
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        let memedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // Show tabbars
+        self.topTabBar.hidden = false
+        self.bottomTabBar.hidden = false
+        
+        return memedImage
+    }
+    
+    
     
     
     

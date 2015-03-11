@@ -25,11 +25,7 @@
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="wt8-Wx-y8j"/>
-                                    <barButtonItem systemItem="camera" id="smh-JY-REt">
-                                        <connections>
-                                            <action selector="cameraButtonPressed:" destination="vXZ-lx-hvc" id="5bz-qw-BTT"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem systemItem="camera" id="smh-JY-REt"/>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="hRf-nO-zns"/>
                                     <barButtonItem title="Album" id="qeZ-Vg-W0y">
                                         <connections>
@@ -103,9 +99,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionButton" destination="FVD-V4-vyY" id="lTY-Ti-Jwa"/>
+                        <outlet property="bottomTabBar" destination="S7P-dG-dhb" id="cMn-hs-Gss"/>
                         <outlet property="bottomTextfield" destination="8H1-OB-gOb" id="kgu-V6-BIy"/>
                         <outlet property="cameraBarButton" destination="smh-JY-REt" id="fvZ-vj-Wl9"/>
                         <outlet property="imageView" destination="Ww9-4a-77m" id="icc-F6-bbv"/>
+                        <outlet property="topTabBar" destination="5b4-l3-lrK" id="8f9-6t-HQa"/>
                         <outlet property="topTextfield" destination="Hxq-JI-WrF" id="lRh-3E-Dqh"/>
                     </connections>
                 </viewController>
