@@ -25,6 +25,7 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
     var viewY: CGFloat?
     
     var memeImage: UIImage?
+
     
     override func viewDidLoad()
     {
@@ -35,11 +36,15 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
         self.imageView.contentMode = UIViewContentMode.ScaleAspectFill
         self.actionButton.enabled = false
         
+        
+        
         // Getting the view diminsions to movie up and down with the keyboard
         self.viewWidth = self.view.frame.width
         self.viewHeight = self.view.frame.height
         self.viewX = self.view.frame.origin.x
         self.viewY = self.view.frame.origin.y
+        
+        
         
  
     }
@@ -91,6 +96,7 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
             var textFieldPadding: CGFloat = 300.0
             var currentWidth = self.view.bounds.width
             var currentHeight = self.view.bounds.height
+            
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 var newY = self.view.bounds.origin.y + textField.frame.origin.y - textFieldPadding
                 var currentX = self.view.bounds.origin.x
@@ -107,16 +113,6 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.view.bounds = CGRect(x: self.viewX!, y: self.viewY!, width: self.viewWidth!, height: self.viewHeight!)
         })
-        
-        if textField == self.topTextfield
-        {
-            
-        }
-        
-        if textField == self.bottomTextfield
-        {
-            
-        }
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
@@ -133,15 +129,16 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
     {
         
         self.memeImage = generateMemedImage()
+        self.saveMeme(self.memeImage!)
         let activityViewController = UIActivityViewController(activityItems: [self.memeImage!], applicationActivities: nil)
         self.presentViewController(activityViewController, animated: true) { () -> Void in
-            self.saveMeme(self.memeImage!)
         }
+        
     }
     
     @IBAction func cancelButtonPressed(sender: UIBarButtonItem)
     {
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func cameraButtonPressed(sender: UIBarButtonItem)
@@ -216,8 +213,11 @@ class MemeMeEditor: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     func saveMeme(memedImage: UIImage)
     {
-        var newMeme = Meme(topTitle: self.topTextfield.text, bottomTitle: self.bottomTextfield.text, image: self.imageView.image!, memedImage: memedImage)
-        (UIApplication.sharedApplication().delegate as AppDelegate).memes.append(newMeme)
+        var newMeme = Meme(topTitle: self.topTextfield.text!, bottomTitle: self.bottomTextfield.text!, image: self.imageView.image!, memedImage: memedImage)
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as AppDelegate
+        appDelegate.memes.append(newMeme)
+
     }
     
     func generateMemedImage() -> UIImage

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6304D6F81AB211E0006E56DA /* MemeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304D6F71AB211E0006E56DA /* MemeDetailViewController.swift */; };
+		6305ED5A1AB0E8250029B547 /* MemeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305ED591AB0E8250029B547 /* MemeTableView.swift */; };
+		6305ED5E1AB1CD050029B547 /* MemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6305ED5D1AB1CD050029B547 /* MemeTableViewCell.swift */; };
+		635E07721AB1D4A10022B297 /* MemeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635E07711AB1D4A10022B297 /* MemeCollectionViewController.swift */; };
+		635E07741AB1D7E50022B297 /* MemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635E07731AB1D7E50022B297 /* MemeCollectionViewCell.swift */; };
 		6383A9B91AAFD93700810558 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6383A9B81AAFD93700810558 /* Meme.swift */; };
 		63B77B011AAF546C0039742C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B77B001AAF546C0039742C /* AppDelegate.swift */; };
 		63B77B031AAF546C0039742C /* MemeMeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B77B021AAF546C0039742C /* MemeMeEditor.swift */; };
@@ -27,6 +32,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6304D6F71AB211E0006E56DA /* MemeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeDetailViewController.swift; sourceTree = "<group>"; };
+		6305ED591AB0E8250029B547 /* MemeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeTableView.swift; sourceTree = "<group>"; };
+		6305ED5D1AB1CD050029B547 /* MemeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeTableViewCell.swift; sourceTree = "<group>"; };
+		635E07711AB1D4A10022B297 /* MemeCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeCollectionViewController.swift; sourceTree = "<group>"; };
+		635E07731AB1D7E50022B297 /* MemeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeCollectionViewCell.swift; sourceTree = "<group>"; };
 		6383A9B81AAFD93700810558 /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		63B77AFB1AAF546C0039742C /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B77AFF1AAF546C0039742C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +88,11 @@
 			isa = PBXGroup;
 			children = (
 				63B77B021AAF546C0039742C /* MemeMeEditor.swift */,
+				6305ED591AB0E8250029B547 /* MemeTableView.swift */,
+				6305ED5D1AB1CD050029B547 /* MemeTableViewCell.swift */,
+				635E07711AB1D4A10022B297 /* MemeCollectionViewController.swift */,
+				635E07731AB1D7E50022B297 /* MemeCollectionViewCell.swift */,
+				6304D6F71AB211E0006E56DA /* MemeDetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -240,8 +255,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				63B77B031AAF546C0039742C /* MemeMeEditor.swift in Sources */,
+				6305ED5A1AB0E8250029B547 /* MemeTableView.swift in Sources */,
+				6305ED5E1AB1CD050029B547 /* MemeTableViewCell.swift in Sources */,
 				6383A9B91AAFD93700810558 /* Meme.swift in Sources */,
+				635E07741AB1D7E50022B297 /* MemeCollectionViewCell.swift in Sources */,
+				635E07721AB1D4A10022B297 /* MemeCollectionViewController.swift in Sources */,
 				63B77B011AAF546C0039742C /* AppDelegate.swift in Sources */,
+				6304D6F81AB211E0006E56DA /* MemeDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
